@@ -1,0 +1,6 @@
+DOCKER BYPASS VERSION
+
+Use start-local.bat.
+Backend uses SQLite for local development.
+Frontend uses Vite.
+No Docker Desktop, MySQL container, or Redis container is required to start the application.

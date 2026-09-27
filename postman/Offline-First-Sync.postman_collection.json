@@ -1,0 +1,94 @@
+{
+  "info": {
+    "name": "Offline-First Sync System",
+    "_postman_id": "offline-first-sync-system",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {"key":"baseUrl","value":"http://localhost:8000"},
+    {"key":"token","value":""},
+    {"key":"recordId","value":""}
+  ],
+  "item": [
+    {
+      "name":"Health",
+      "request":{"method":"GET","header":[],"url":"{{baseUrl}}/health"}
+    },
+    {
+      "name":"Register",
+      "request":{
+        "method":"POST",
+        "header":[{"key":"Content-Type","value":"application/json"}],
+        "body":{"mode":"raw","raw":"{\"email\":\"demo@example.com\",\"password\":\"Demo@12345\",\"full_name\":\"Demo User\"}"},
+        "url":"{{baseUrl}}/api/auth/register"
+      }
+    },
+    {
+      "name":"Login",
+      "request":{
+        "method":"POST",
+        "header":[{"key":"Content-Type","value":"application/json"}],
+        "body":{"mode":"raw","raw":"{\"email\":\"demo@example.com\",\"password\":\"Demo@12345\"}"},
+        "url":"{{baseUrl}}/api/auth/login"
+      }
+    },
+    {
+      "name":"Current User",
+      "request":{
+        "method":"GET",
+        "header":[{"key":"Authorization","value":"Bearer {{token}}"}],
+        "url":"{{baseUrl}}/api/auth/me"
+      }
+    },
+    {
+      "name":"List Records",
+      "request":{
+        "method":"GET",
+        "header":[{"key":"Authorization","value":"Bearer {{token}}"}],
+        "url":"{{baseUrl}}/api/records?page=1&page_size=20"
+      }
+    },
+    {
+      "name":"Create Record",
+      "request":{
+        "method":"POST",
+        "header":[{"key":"Authorization","value":"Bearer {{token}}"},{"key":"Content-Type","value":"application/json"}],
+        "body":{"mode":"raw","raw":"{\"title\":\"Offline task\",\"content\":\"Created from Postman\",\"status\":\"active\"}"},
+        "url":"{{baseUrl}}/api/records"
+      }
+    },
+    {
+      "name":"Sync Batch",
+      "request":{
+        "method":"POST",
+        "header":[{"key":"Authorization","value":"Bearer {{token}}"},{"key":"Content-Type","value":"application/json"}],
+        "body":{"mode":"raw","raw":"{\"operations\":[]}"}, 
+        "url":"{{baseUrl}}/api/sync/batch"
+      }
+    },
+    {
+      "name":"Sync History",
+      "request":{
+        "method":"GET",
+        "header":[{"key":"Authorization","value":"Bearer {{token}}"}],
+        "url":"{{baseUrl}}/api/sync/history?page=1&page_size=20"
+      }
+    },
+    {
+      "name":"Conflicts",
+      "request":{
+        "method":"GET",
+        "header":[{"key":"Authorization","value":"Bearer {{token}}"}],
+        "url":"{{baseUrl}}/api/sync/conflicts"
+      }
+    },
+    {
+      "name":"Dashboard",
+      "request":{
+        "method":"GET",
+        "header":[{"key":"Authorization","value":"Bearer {{token}}"}],
+        "url":"{{baseUrl}}/api/dashboard/stats"
+      }
+    }
+  ]
+}
